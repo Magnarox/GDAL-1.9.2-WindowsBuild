@@ -1,0 +1,28 @@
+Sorry but I'm french, if someone want to translate...
+
+Objectif : 
+Faire une distrib gdal 1.9.2 64 bits pour Windows supportant ECW / OGDI / ... avec les bindings Python et Java.
+
+Prérequis :
+Toute la compilation va s'appuyer sur le compilateur Visual C++ 2010.
+Nous commencerons donc par installer Microsoft Visual C++ 2010 Express. 
+Un lien pour télécharger l'ISO : https://go.microsoft.com/?linkid=9709969
+Dézipper l'ISO avec 7zip (par exemple) et lancer le setup puis installer Microsoft Visual C++ 2010 Express.
+Par défaut, il n'est pas possible de faire du 64 bits avec Visual C++ 2010 Express. Il faut installer le framework .NET 4.0 et le Windows Software Development Kit version 7.1 et un outil qui va nous lier tout çà Mise à jour du compilateur Microsoft Visual C++ 2010 Service Pack 1.
+Un lien framework .NET 4.0 : https://www.microsoft.com/fr-fr/download/details.aspx?id=17851
+Un lien Windows Software Development Kit version 7.1 : http://msdn.microsoft.com/en-us/windowsserver/bb980924.aspx
+Mise à jour du compilateur Microsoft Visual C++ 2010 Service Pack 1 : http://www.microsoft.com/fr-fr/download/details.aspx?id=4422
+
+Dans l'installation SDK installer seulement "Windows Headers and Libraries" et "Tools". Décocher tout le reste.
+
+On y est presque. Si on veut que tout soit beau il faut ajouter un fichier vcvars64.bat dans le répertoire <InstallVS2010>\VC\bin\amd64
+Ajouter à ce fichier le contenu suivant : 
+CALL "<InstallSDK>\Windows\v7.1\Bin\SetEnv.cmd" /release /x64
+
+Tester en lançant l'invite de commande visual studio ("Visual Studio Command Prompt") et taper "vcvarsall.bat amd64". Cela doit vous afficher :
+Setting SDK environment relative to D:\Program Files\Microsoft SDKs\Windows\v7.1
+\.
+Targeting Windows 7 x64 Release
+
+C'est à partir de la que vont s'effectuer tout les builds avec nmake.
+
