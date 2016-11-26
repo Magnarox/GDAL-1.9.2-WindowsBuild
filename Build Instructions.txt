@@ -161,7 +161,7 @@ nmake /f makefile.vc deploy
 Paramétrer GDAL pour utiliser Proj4
 Modifier le fichier gdal-1.9.2\nmake.opt
 Remplacer la partie PROJ_FLAGS, etc. par
-PROJ_HOME = <Lieu où est déployé proj4>
+PROJ_HOME = <Lieu où est déployé proj4 (INSTDIR)>
 !IFDEF PROJ_HOME
 PROJ_FLAGS = -DPROJ_STATIC
 PROJ_INCLUDE = -I$(PROJ_HOME)\include
@@ -280,6 +280,40 @@ EXTRAFLAGS	=	$(EXTRAFLAGS) -DFRMT_zlib
 
 
 --------------------------------------------------------------------------------------
+CONFIGURE ERDAS ECW 4.3
+N'est possible que si on récupère le mot de passe de l'installeur : "contacter le support".
+Modifier le fichier gdal-1.9.2\nmake.opt
+Remplacer
+ECWDIR  = 	"c:/Program Files/ERDAS/ERDAS ECW JPEG2000 Read SDK"
+ECWFLAGS =	-DECWSDK_VERSION=41 \
+		-I$(ECWDIR)\include \
+		-I$(ECWDIR)\include/NCSECW/api -I$(ECWDIR)\include/NCSECW/jp2 \
+		-I$(ECWDIR)\include/NCSECW/ecw
+ECWLIB  = 	$(ECWDIR)\lib\vc90\win32\NCSEcw4_RO.lib \
+		$(ECWDIR)\lib\vc90\win32\NCSUtil4.lib \
+		$(ECWDIR)\lib\vc90\win32\NCScnet4.lib
+par
+ECWDIR  = 	<Location du SDK>
+ECWFLAGS =	-DECWSDK_VERSION=43 \
+		-I$(ECWDIR)\include \
+		-I$(ECWDIR)\include/NCSECW/api -I$(ECWDIR)\include/NCSECW/jp2 \
+		-I$(ECWDIR)\include/NCSECW/ecw
+ECWLIB  = 	$(ECWDIR)\lib\vc100\x64\NCSEcw4_RO.lib \
+		$(ECWDIR)\lib\vc100\x64\NCSUtil4.lib \
+		$(ECWDIR)\lib\vc100\x64\NCScnet4.lib
 
-
+Décommenter ECW_PLUGIN = YES
+		
+Modifier le fichier gdal-1.9.2\makefile.vc
+Ajouter à la fin
+deploy-ecw:
+	copy $(ECWDIR)\bin\vc10\x64\tbb.dll $(BINDIR)
+	copy $(ECWDIR)\bin\vc10\x64\NCSEcw4_RO.dll $(BINDIR)
+	copy $(ECWDIR)\bin\vc10\x64\NCSUtil4.dll $(BINDIR)
+	copy $(ECWDIR)\bin\vc10\x64\NCScnet4.dll $(BINDIR)
+	
+Lancer l'invite de commande visual studio et taper "vcvarsall.bat amd64".
+Positionner vous dans le répertoire "gdal-1.9.2" et taper :
+nmake /f makefile.vc deploy-ecw
+------------------------------------------------------------------------------------------
 

@@ -208,3 +208,8 @@ devinstall: install
 !ENDIF
 	copy gdal_i.lib $(LIBDIR)
 
+deploy-ecw:
+	copy $(ECWDIR)\bin\vc10\x64\tbb.dll $(BINDIR)
+	copy $(ECWDIR)\bin\vc10\x64\NCSEcw4_RO.dll $(BINDIR)
+	copy $(ECWDIR)\bin\vc10\x64\NCSUtil4.dll $(BINDIR)
+	copy $(ECWDIR)\bin\vc10\x64\NCScnet4.dll $(BINDIR)
