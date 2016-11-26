@@ -58,6 +58,8 @@ $(STANDARD_TARGETS):
 	  $(MAKE) --directory $$i $@; \
 	done
 
+deploy:
+	cp ./bin/win32/*.dll D:/Developpement/GIT-GDAL/distrib/gdal/bin
 
 mk_nonlocal_install_dirs:
 	$(MKINSTALLDIR) $(prefix) $(exec_prefix) $(INST_LIB) $(INST_BIN) $(INST_INCLUDE)

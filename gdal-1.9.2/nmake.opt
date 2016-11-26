@@ -396,8 +396,7 @@ PROJ_HOME = D:\Developpement\GIT-GDAL\distrib\proj4
 !IFDEF PROJ_HOME
 PROJ_FLAGS = -DPROJ_STATIC
 PROJ_INCLUDE = -I$(PROJ_HOME)\include
-PROJ_LIBRARY = $(PROJ_HOME)\lib\proj.lib \
-			$(PROJ_HOME)\lib\proj_i.lib
+PROJ_LIBRARY = $(PROJ_HOME)\lib\proj_i.lib
 !ENDIF
 
 # Add ORACLE support.

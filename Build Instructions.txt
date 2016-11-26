@@ -162,8 +162,7 @@ PROJ_HOME = <Lieu où est déployé proj4>
 !IFDEF PROJ_HOME
 PROJ_FLAGS = -DPROJ_STATIC
 PROJ_INCLUDE = -I$(PROJ_HOME)\include
-PROJ_LIBRARY = $(PROJ_HOME)\lib\proj.lib \
-			$(PROJ_HOME)\lib\proj_i.lib
+PROJ_LIBRARY = $(PROJ_HOME)\lib\proj_i.lib
 !ENDIF
 
 -----------------------------------------------------------------
@@ -235,9 +234,15 @@ MSDevDir
 MSVCDir
 INSTALLDISK
 
+Modifier le fichier makefile et ajouter à la fin
+deploy:
+	cp ./bin/win32/*.dll <la valeur de GDAL_HOME>/bin
+
 Lancer l'invite de commande visual studio et taper "vcvarsall.bat amd64"
 Se positionner dans le répertoire <Rep Install Cygwin64>/home/ogdi-3.2.0 et taper "varwin32.bat"
 Dans le bash taper "make"
+BUILD SUCCESS !!
+et ensuite : "make install" puis "make deploy"
 
 Incidents possibles : 
 Les fins de ligne du fichier ogdi-3.2.0/configs/mkinstalldirs peuvent poser des problèmes. Remplacer les à l'aide de notepad++ Edition > Convertir les sauts de ligne > Convertir en format UNIX
@@ -256,6 +261,20 @@ OGDIDIR =	<Chemin vers ogdi dans cygwin>
 OGDIVER =	32
 OGDILIB =	$(OGDIDIR)\lib\win32\ogdi.lib \
 		$(OGDIDIR)\lib\win32\zlib_ogdi$(OGDIVER).lib
+		
+Il est nécessaire de modifier le fichier frmts\makefile.vc pour pouvoir linker zlib
+Remplacer
+!IFDEF OGDIDIR
+EXTRAFLAGS	=	$(EXTRAFLAGS) -DFRMT_ogdi
+!ELSE
+EXTRAFLAGS	=	$(EXTRAFLAGS) -DFRMT_zlib
+!ENDIF
+par
+!IFDEF OGDIDIR
+EXTRAFLAGS	=	$(EXTRAFLAGS) -DFRMT_ogdi
+!ENDIF
+EXTRAFLAGS	=	$(EXTRAFLAGS) -DFRMT_zlib
+
 
 --------------------------------------------------------------------------------------
 
