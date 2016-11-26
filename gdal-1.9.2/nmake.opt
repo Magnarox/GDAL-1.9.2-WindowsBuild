@@ -51,7 +51,7 @@ MSVC_VER=1600
 # But the paths *should* be absolute (relative paths mess up in submakefiles).
 
 !IFNDEF GDAL_HOME
-GDAL_HOME = "D:\Developpement\GIT-GDAL\distrib"
+GDAL_HOME = "D:\Developpement\GIT-GDAL\distrib\gdal"
 !ENDIF
 !IFNDEF BINDIR
 BINDIR = $(GDAL_HOME)\bin
@@ -276,10 +276,10 @@ JPEG12_SUPPORTED = 1
 #DWG_LIB=$(DWG_LIB_DIR)\DD_AcisBuilder_dll.lib $(DWG_LIB_DIR)\DD_AcisRenderer_dll.lib $(DWG_LIB_DIR)\DD_Alloc_dll.lib $(DWG_LIB_DIR)\DD_BmpExport_dll.lib $(DWG_LIB_DIR)\DD_Br_dll.lib $(DWG_LIB_DIR)\DD_Db_dll.lib $(DWG_LIB_DIR)\DD_DwfExport_dll.lib $(DWG_LIB_DIR)\DD_DwfImport_dll.lib $(DWG_LIB_DIR)\DD_Ge_dll.lib $(DWG_LIB_DIR)\DD_Gi_dll.lib $(DWG_LIB_DIR)\DD_Gs_dll.lib $(DWG_LIB_DIR)\DD_ModelerGeometry_dll.lib $(DWG_LIB_DIR)\DD_Root_dll.lib $(DWG_LIB_DIR)\DD_Sm_dll.lib $(DWG_LIB_DIR)\DD_SpatialIndex_dll.lib $(DWG_LIB_DIR)\DD_VC6MD_OleDataAccess_dll.lib
 
 # Uncomment the following and update to enable OGDI support.
-#OGDIDIR =	D:\warmerda\iii\devdir
-#OGDIVER =	31
-#OGDILIB =	$(OGDIDIR)\lib\$(TARGET)\ogdi$(OGDIVER).lib \
-#		$(OGDIDIR)\lib\$(TARGET)\zlib_ogdi$(OGDIVER).lib
+OGDIDIR =	D:\Developpement\GIT-GDAL\cygwin64\home\ogdi-3.2.0
+OGDIVER =	32
+OGDILIB =	$(OGDIDIR)\lib\win32\ogdi.lib \
+		$(OGDIDIR)\lib\win32\zlib_ogdi$(OGDIVER).lib
 
 # Uncomment for Expat support (required for KML, GPX and GeoRSS read support).
 #EXPAT_DIR = "C:\Program Files\Expat 2.0.1"
@@ -392,9 +392,12 @@ GRIB_SETTING=yes
 # PROJ.4 stuff
 # Uncomment the following lines to link PROJ.4 library statically. Otherwise
 # it will be linked dynamically during runtime.
-#PROJ_FLAGS = -DPROJ_STATIC
-#PROJ_INCLUDE = -Id:\projects\proj.4\src
-#PROJ_LIBRARY = d:\projects\proj.4\src\proj_i.lib
+PROJ_HOME = D:\Developpement\GIT-GDAL\distrib\proj4
+!IFDEF PROJ_HOME
+PROJ_FLAGS = -DPROJ_STATIC
+PROJ_INCLUDE = -I$(PROJ_HOME)\include
+PROJ_LIBRARY = $(PROJ_HOME)\lib\proj_i.lib
+!ENDIF
 
 # Add ORACLE support.
 # Uncomment the following line to enable OCI Oracle Spatial support.
@@ -452,9 +455,9 @@ OCI_INCLUDE =	-I$(ORACLE_HOME)\oci\include
 #DODS_FLAGS = -DLIBDAP_39
 
 # Uncomment for GEOS support
-#GEOS_DIR=C:/warmerda/geos
-#GEOS_CFLAGS = -I$(GEOS_DIR)/capi -I$(GEOS_DIR)/source/headers -DHAVE_GEOS
-#GEOS_LIB     = $(GEOS_DIR)/source/geos_c_i.lib
+GEOS_DIR=D:\Developpement\GIT-GDAL\GDAL-1.9.2-WindowsBuild\geos-3.2.3
+GEOS_CFLAGS = -I$(GEOS_DIR)\capi -I$(GEOS_DIR)\source\headers -DHAVE_GEOS
+GEOS_LIB     = $(GEOS_DIR)\source\geos_c_i.lib
 
 # Uncomment for SOSI support
 #SOSI_ENABLED = YES

@@ -6,6 +6,12 @@
 !MESSAGE *** GEOS Build Configuration ***
 !INCLUDE <ntwin32.mak>
 
+!IFNDEF GDAL_HOME
+GDAL_HOME = "D:\Developpement\GIT-GDAL\distrib\gdal"
+!ENDIF
+
+!MESSAGE *** Setting GDAL_HOME $(GDAL_HOME)
+
 ###############################################################################
 # For convenience, user may put custom settings to private mynmake.opt
 # and use EXT_NMAKE_OPT option while calling nmake.exe, as follows:
@@ -79,8 +85,8 @@ GEOS_MSC = 1600
 GEOS_MSVC = 10.0
 GEOS_MSC = 1600
 !ELSE
-GEOS_MSVC = 0.0
-GEOS_MSC = 0
+GEOS_MSVC = 10.0
+GEOS_MSC = 1600
 !ENDIF
 
 !IF "$(GEOS_MSVC)" == "0.0" && "$(GEOS_MSC)" == "0"

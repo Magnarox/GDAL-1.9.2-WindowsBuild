@@ -140,5 +140,143 @@ Supported Formats:
   ZMap (rwv): ZMap Plus Grid
   NGSGEOID (rov): NOAA NGS Geoid Height Grids
 
+----------------------------------------------------------------
+Build proj4 4.8.0
+Modifier le fichier proj.4-4.8.0\nmake.opt et modifier
+!IFNDEF INSTDIR
+ INSTDIR=<Lieu où déployer proj4>
+!ENDIF
+
+Lancer l'invite de commande visual studio et taper "vcvarsall.bat amd64".
+Positionner vous dans le répertoire "proj.4-4.8.0" et taper :
+nmake /f makefile.vc
+BUILD SUCCESS !!
+et ensuite : 
+cd src 
+nmake /f makefile.vc install
+
+Paramétrer GDAL pour utiliser Proj4
+Modifier le fichier gdal-1.9.2\nmake.opt
+Remplacer la partie PROJ_FLAGS, etc. par
+PROJ_HOME = <Lieu où est déployé proj4>
+!IFDEF PROJ_HOME
+PROJ_FLAGS = -DPROJ_STATIC
+PROJ_INCLUDE = -I$(PROJ_HOME)\include
+PROJ_LIBRARY = $(PROJ_HOME)\lib\proj_i.lib
+!ENDIF
+
+-----------------------------------------------------------------
+Build geos 3.2.3
+  
+Lancer le fichier autogen.bat
+
+Modifier le fichier geos-3.2.3\nmake.opt et modifier
+!ELSEIF "$(_NMAKE_VER)" == "10.00.30319.01"
+GEOS_MSVC = 10.0
+GEOS_MSC = 1600
+!ELSE
+GEOS_MSVC = 0.0
+GEOS_MSC = 0
+!ENDIF
+par
+!ELSEIF "$(_NMAKE_VER)" == "10.00.30319.01"
+GEOS_MSVC = 10.0
+GEOS_MSC = 1600
+!ELSE
+GEOS_MSVC = 10.0
+GEOS_MSC = 1600
+!ENDIF
+Cela va permettre de forcer la version du compilateur utilisée.
+Ajouter aussi 
+!IFNDEF GDAL_HOME
+GDAL_HOME = "<Meme répertoire que le GDAL_HOME paramétré plus haut>"
+!ENDIF
+
+Modifier le geos-3.2.3\makefile.vc pour ajouter de quoi mettre les dll avec gdal.
+deploy:
+	cd source
+	-mkdir $(GDAL_HOME)\bin
+	copy *.dll $(GDAL_HOME)\bin
+	cd ..
+
+Lancer l'invite de commande visual studio et taper "vcvarsall.bat amd64".
+Positionner vous dans le répertoire "geos-3.2.3" et taper :
+nmake /f makefile.vc
+BUILD SUCCESS !!
+et ensuite : nmake /f makefile.vc deploy
+
+Paramétrer GDAL pour utiliser GEOS
+Modifier le fichier gdal-1.9.2\nmake.opt
+Remplacer
+# Uncomment for GEOS support
+#GEOS_DIR=C:/warmerda/geos
+#GEOS_CFLAGS = -I$(GEOS_DIR)/capi -I$(GEOS_DIR)/source/headers -DHAVE_GEOS
+#GEOS_LIB     = $(GEOS_DIR)/source/geos_c_i.lib
+par
+GEOS_DIR=<Répertoire root de geos-3.2.3>
+GEOS_CFLAGS = -I$(GEOS_DIR)\capi -I$(GEOS_DIR)\source\headers -DHAVE_GEOS
+GEOS_LIB     = $(GEOS_DIR)\source\geos_c_i.lib
+
+-------------------------------------------------------------------------------
+Build OGDI
+
+Il faut d'abord préparer un cygwin pour pouvoir compiler OGDI. Lancer le cygwin-x86_64.exe.
+Spécifier un répertoire d'install puis un répertoire pour les downloads nécessaires.
+Sélectionner la première URL comme download site : http://cygwin.mirror.constant.com
+Dans l'arbre proposé ouvrir la partie Devel puis sélectionner :
+autobuild / autoconf / autoconf 2.1 / autogen / automake / automake 1.15 / libtool / make / pkg-config
+Appuyer sur Suivant / Suivant 
+
+Copier / Coller le répertoire ogdi-3.2.0 dans <Rep Install Cygwin64>/home
+Dans ce répertoire modifier le fichier varwin32.bat
+Modifier les variables
+MSDevDir
+MSVCDir
+INSTALLDISK
+
+Modifier le fichier makefile et ajouter à la fin
+deploy:
+	cp ./bin/win32/*.dll <la valeur de GDAL_HOME>/bin
+
+Lancer l'invite de commande visual studio et taper "vcvarsall.bat amd64"
+Se positionner dans le répertoire <Rep Install Cygwin64>/home/ogdi-3.2.0 et taper "varwin32.bat"
+Dans le bash taper "make"
+BUILD SUCCESS !!
+et ensuite : "make install" puis "make deploy"
+
+Incidents possibles : 
+Les fins de ligne du fichier ogdi-3.2.0/configs/mkinstalldirs peuvent poser des problèmes. Remplacer les à l'aide de notepad++ Edition > Convertir les sauts de ligne > Convertir en format UNIX
+Erreur lors du link. Le path vers les fichiers Visual C++ ne doit pas pointer au bon endroit (racine au lieu du sous répertoire amd64). Vérifier les variables d'environnement de varwin32.bat, modifier et ATTENTION relancer l'invite de commande pour bien nettoyer les variables.
+
+Paramétrer GDAL pour utiliser OGDI
+Modifier le fichier gdal-1.9.2\nmake.opt
+Remplacer
+# Uncomment the following and update to enable OGDI support.
+#OGDIDIR =	D:\warmerda\iii\devdir
+#OGDIVER =	31
+#OGDILIB =	$(OGDIDIR)\lib\$(TARGET)\ogdi$(OGDIVER).lib \
+#		$(OGDIDIR)\lib\$(TARGET)\zlib_ogdi$(OGDIVER).lib
+par
+OGDIDIR =	<Chemin vers ogdi dans cygwin>
+OGDIVER =	32
+OGDILIB =	$(OGDIDIR)\lib\win32\ogdi.lib \
+		$(OGDIDIR)\lib\win32\zlib_ogdi$(OGDIVER).lib
+		
+Il est nécessaire de modifier le fichier frmts\makefile.vc pour pouvoir linker zlib
+Remplacer
+!IFDEF OGDIDIR
+EXTRAFLAGS	=	$(EXTRAFLAGS) -DFRMT_ogdi
+!ELSE
+EXTRAFLAGS	=	$(EXTRAFLAGS) -DFRMT_zlib
+!ENDIF
+par
+!IFDEF OGDIDIR
+EXTRAFLAGS	=	$(EXTRAFLAGS) -DFRMT_ogdi
+!ENDIF
+EXTRAFLAGS	=	$(EXTRAFLAGS) -DFRMT_zlib
+
+
+--------------------------------------------------------------------------------------
+
 
 

@@ -18,42 +18,43 @@ rem
 rem Visual Developer Studio files.
 rem
 
-set MSDevDir=C:\msvc5\DevStudio\SharedIDE
+set MSDevDir=D:/Program Files (x86)/Microsoft Visual Studio 10.0/Common7/IDE
 
 
 rem
 rem Visual C++ files.
 rem
 
-set MSVCDir=C:\msvc5\DevStudio\VC
+set MSVCDir=D:/Program Files (x86)/Microsoft Visual Studio 10.0/VC
 
+set VcOsDir=amd64
 
 rem
 rem Installation disk.
 rem
 
-set INSTALLDISK=C:
+set INSTALLDISK=D:/Developpement/GIT-GDAL/cygwin64
 
 
 rem
 rem Path to GNU tools.
 rem
 
-set GNUTOOLS=%INSTALLDISK%\usr\bin
+set GNUTOOLS=%INSTALLDISK%/bin
 
 
 rem
 rem The shell.
 rem
 
-set shell=%INSTALLDISK%\bin\sh.exe
+set shell=%INSTALLDISK%/bin/sh.exe
 
 
 rem
 rem Root of the sources.
 rem
 
-set TOPDIR=%INSTALLDISK%/devdir
+set TOPDIR=%INSTALLDISK%/home/ogdi-3.2.0
 
 
 rem
@@ -73,9 +74,9 @@ set MAKE_MODE=UNIX
 echo Setting environment variables, then starting BASH.
 
 
-set PATH="%MSDevDir%\BIN;%MSVCDir%\BIN";"%MSVCDir%\BIN\%VcOsDir%";%MSDevDir%\BIN;%MSVCDir%\BIN;%MSVCDir%\BIN\%VcOsDir%;"%GNUTOOLS%";%GNUTOOLS%;"%TOPDIR%"\bin\"%TARGET%";%PATH%
-set INCLUDE=%MSVCDir%\INCLUDE;%MSVCDir%\MFC\INCLUDE;%MSVCDir%\ATL\INCLUDE;%INCLUDE%
-set LIB=%MSVCDir%\LIB;%MSVCDir%\MFC\LIB;%LIB%
+set PATH="%MSDevDir%";"%MSVCDir%/BIN/%VcOsDir%";"%GNUTOOLS%";"%TOPDIR%/bin/%TARGET%";%PATH%
+set INCLUDE=%MSVCDir%/INCLUDE;%MSVCDir%/ATLMFC/INCLUDE;%INCLUDE%
+set LIB=%MSVCDir%/LIB/%VcOsDir%;%MSVCDir%/ATLMFC/LIB/%VcOsDir%;%LIB%
 
 
-%GNUTOOLS%\bash.exe
+%GNUTOOLS%/bash.exe
