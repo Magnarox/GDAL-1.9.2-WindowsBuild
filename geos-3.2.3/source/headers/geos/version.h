@@ -1,5 +1,5 @@
 /**********************************************************************
- * $Id: version.h.in 2141 2008-07-26 20:47:29Z mloskot $
+ * $Id: version.h.vc 2981 2010-04-18 15:31:32Z pramsey $
  *
  * GEOS - Geometry Engine Open Source
  * http://geos.refractions.net
@@ -11,9 +11,20 @@
  * by the Free Software Foundation. 
  * See the COPYING file for more information.
  *
+ **********************************************************************
+ *
+ * This is a version header dedicated for use with Microsoft Visual C++
+ * compiler.
+ * NOTE: Remember to update this file manually when version
+ * number changes.
+ *
  **********************************************************************/
 #ifndef GEOS_VERSION_H_INCLUDED
 #define GEOS_VERSION_H_INCLUDED
+
+#ifndef _MSC_VER
+#error "This version.h intended for use with MS Visual C++"
+#endif
 
 #ifndef GEOS_VERSION_MAJOR
 #define GEOS_VERSION_MAJOR 3

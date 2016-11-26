@@ -141,8 +141,36 @@ Supported Formats:
   NGSGEOID (rov): NOAA NGS Geoid Height Grids
 
 ----------------------------------------------------------------
+Build proj4 4.8.0
+Modifier le fichier proj.4-4.8.0\nmake.opt et modifier
+!IFNDEF INSTDIR
+ INSTDIR=<Lieu où déployer proj4>
+!ENDIF
+
+Lancer l'invite de commande visual studio et taper "vcvarsall.bat amd64".
+Positionner vous dans le répertoire "proj.4-4.8.0" et taper :
+nmake /f makefile.vc
+BUILD SUCCESS !!
+et ensuite : 
+cd src 
+nmake /f makefile.vc install
+
+Paramétrer GDAL pour utiliser Proj4
+Modifier le fichier gdal-1.9.2\nmake.opt
+Remplacer la partie PROJ_FLAGS, etc. par
+PROJ_HOME = <Lieu où est déployé proj4>
+!IFDEF PROJ_HOME
+PROJ_FLAGS = -DPROJ_STATIC
+PROJ_INCLUDE = -I$(PROJ_HOME)\include
+PROJ_LIBRARY = $(PROJ_HOME)\lib\proj.lib \
+			$(PROJ_HOME)\lib\proj_i.lib
+!ENDIF
+
+-----------------------------------------------------------------
 Build geos 3.2.3
   
+Lancer le fichier autogen.bat
+
 Modifier le fichier geos-3.2.3\nmake.opt et modifier
 !ELSEIF "$(_NMAKE_VER)" == "10.00.30319.01"
 GEOS_MSVC = 10.0
@@ -176,5 +204,22 @@ Lancer l'invite de commande visual studio et taper "vcvarsall.bat amd64".
 Positionner vous dans le répertoire "geos-3.2.3" et taper :
 nmake /f makefile.vc
 BUILD SUCCESS !!
-et ensuite : nmake /f makefile.vc install
+et ensuite : nmake /f makefile.vc deploy
+
+Paramétrer GDAL pour utiliser GEOS
+Modifier le fichier gdal-1.9.2\nmake.opt
+Remplacer
+# Uncomment for GEOS support
+#GEOS_DIR=C:/warmerda/geos
+#GEOS_CFLAGS = -I$(GEOS_DIR)/capi -I$(GEOS_DIR)/source/headers -DHAVE_GEOS
+#GEOS_LIB     = $(GEOS_DIR)/source/geos_c_i.lib
+par
+GEOS_DIR=<Répertoire root de geos-3.2.3>
+GEOS_CFLAGS = -I$(GEOS_DIR)\capi -I$(GEOS_DIR)\source\headers -DHAVE_GEOS
+GEOS_LIB     = $(GEOS_DIR)\source\geos_c_i.lib
+
+-------------------------------------------------------------------------------
+
+
+
 
