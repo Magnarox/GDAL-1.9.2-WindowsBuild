@@ -1,0 +1,4 @@
+Download ERDAS ECW JPEG2000 SDK Desktop ReadOnly v4.3 here :
+http://download.hexagongeospatial.com/
+
+Ask for a licence to hexagonspatial...
