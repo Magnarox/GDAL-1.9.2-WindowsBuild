@@ -316,4 +316,23 @@ Lancer l'invite de commande visual studio et taper "vcvarsall.bat amd64".
 Positionner vous dans le répertoire "gdal-1.9.2" et taper :
 nmake /f makefile.vc deploy-ecw
 ------------------------------------------------------------------------------------------
+BINDINGS
+
+Installation de swig
+Dézipper swigwin-2.0.4 où bon vous semble.
+Modifier le fichier gdal-1.9.2\nmake.opt. Paramétrer la variable SWIG.
+
+Paramétrer les variables d'environnement suivante : 
+GDAL_DATA=<Chemin vers les datas>
+GDAL_DRIVER_PATH=<Chemin vers les gdal-plugins>
+PROJ_LIB=<Chemin vers le déploiement de PROJ4>
+PATH=Ajouter le chemin vers les exe gdal
+
+Installation de Python 2.7.11 (Ou bon vous semble mais éviter les espaces dans les dossiers)
+Modifier le fichier gdal-1.9.2\nmake.opt
+Mettre à jour la variable PYDIR
+
+
+
+
 

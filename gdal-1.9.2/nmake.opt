@@ -75,12 +75,12 @@ HTMLDIR = $(GDAL_HOME)\html
 # Set this to the installed directory containing python.  If you don't
 # have python just let it point to a directory that does not exist (as now).
 !IFNDEF PYDIR 
-PYDIR   =	"C:\Software\Python24"
+PYDIR   =	"D:\Developpement\GIT-GDAL\Python27"
 !ENDIF
 
 # Set the location of your SWIG installation
 !IFNDEF SWIG
-SWIG = swig.exe
+SWIG = D:\Developpement\GIT-GDAL\swigwin-2.0.4\swig.exe
 !ENDIF
 
 # SWIG Java settings
