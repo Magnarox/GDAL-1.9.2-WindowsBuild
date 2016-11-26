@@ -452,9 +452,9 @@ OCI_INCLUDE =	-I$(ORACLE_HOME)\oci\include
 #DODS_FLAGS = -DLIBDAP_39
 
 # Uncomment for GEOS support
-#GEOS_DIR=C:/warmerda/geos
-#GEOS_CFLAGS = -I$(GEOS_DIR)/capi -I$(GEOS_DIR)/source/headers -DHAVE_GEOS
-#GEOS_LIB     = $(GEOS_DIR)/source/geos_c_i.lib
+GEOS_DIR=D:\Developpement\GIT-GDAL\GDAL-1.9.2-WindowsBuild\geos-3.2.3
+GEOS_CFLAGS = -I$(GEOS_DIR)\capi -I$(GEOS_DIR)\source\headers -DHAVE_GEOS
+GEOS_LIB     = $(GEOS_DIR)\source\geos_c_i.lib
 
 # Uncomment for SOSI support
 #SOSI_ENABLED = YES
