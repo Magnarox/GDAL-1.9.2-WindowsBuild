@@ -7,7 +7,7 @@
 !INCLUDE <ntwin32.mak>
 
 !IFNDEF GDAL_HOME
-GDAL_HOME = "D:\Developpement\GIT-GDAL\distrib"
+GDAL_HOME = "D:\Developpement\GIT-GDAL\distrib\gdal"
 !ENDIF
 
 !MESSAGE *** Setting GDAL_HOME $(GDAL_HOME)

@@ -51,7 +51,7 @@ MSVC_VER=1600
 # But the paths *should* be absolute (relative paths mess up in submakefiles).
 
 !IFNDEF GDAL_HOME
-GDAL_HOME = "D:\Developpement\GIT-GDAL\distrib"
+GDAL_HOME = "D:\Developpement\GIT-GDAL\distrib\gdal"
 !ENDIF
 !IFNDEF BINDIR
 BINDIR = $(GDAL_HOME)\bin
@@ -392,9 +392,13 @@ GRIB_SETTING=yes
 # PROJ.4 stuff
 # Uncomment the following lines to link PROJ.4 library statically. Otherwise
 # it will be linked dynamically during runtime.
-#PROJ_FLAGS = -DPROJ_STATIC
-#PROJ_INCLUDE = -Id:\projects\proj.4\src
-#PROJ_LIBRARY = d:\projects\proj.4\src\proj_i.lib
+PROJ_HOME = D:\Developpement\GIT-GDAL\distrib\proj4
+!IFDEF PROJ_HOME
+PROJ_FLAGS = -DPROJ_STATIC
+PROJ_INCLUDE = -I$(PROJ_HOME)\include
+PROJ_LIBRARY = $(PROJ_HOME)\lib\proj.lib \
+			$(PROJ_HOME)\lib\proj_i.lib
+!ENDIF
 
 # Add ORACLE support.
 # Uncomment the following line to enable OCI Oracle Spatial support.
