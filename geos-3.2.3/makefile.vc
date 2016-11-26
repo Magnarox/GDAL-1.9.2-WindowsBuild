@@ -30,3 +30,9 @@ clean:
 	cd source
 	$(MAKE) /f makefile.vc clean
 	cd ..
+
+deploy:
+	cd source
+	-mkdir $(GDAL_HOME)\bin
+	copy *.dll $(GDAL_HOME)\bin
+	cd ..
