@@ -219,7 +219,45 @@ GEOS_CFLAGS = -I$(GEOS_DIR)\capi -I$(GEOS_DIR)\source\headers -DHAVE_GEOS
 GEOS_LIB     = $(GEOS_DIR)\source\geos_c_i.lib
 
 -------------------------------------------------------------------------------
+Build OGDI
 
+Il faut d'abord préparer un cygwin pour pouvoir compiler OGDI. Lancer le cygwin-x86_64.exe.
+Spécifier un répertoire d'install puis un répertoire pour les downloads nécessaires.
+Sélectionner la première URL comme download site : http://cygwin.mirror.constant.com
+Dans l'arbre proposé ouvrir la partie Devel puis sélectionner :
+autobuild / autoconf / autoconf 2.1 / autogen / automake / automake 1.15 / libtool / make / pkg-config
+Appuyer sur Suivant / Suivant 
+
+Copier / Coller le répertoire ogdi-3.2.0 dans <Rep Install Cygwin64>/home
+Dans ce répertoire modifier le fichier varwin32.bat
+Modifier les variables
+MSDevDir
+MSVCDir
+INSTALLDISK
+
+Lancer l'invite de commande visual studio et taper "vcvarsall.bat amd64"
+Se positionner dans le répertoire <Rep Install Cygwin64>/home/ogdi-3.2.0 et taper "varwin32.bat"
+Dans le bash taper "make"
+
+Incidents possibles : 
+Les fins de ligne du fichier ogdi-3.2.0/configs/mkinstalldirs peuvent poser des problèmes. Remplacer les à l'aide de notepad++ Edition > Convertir les sauts de ligne > Convertir en format UNIX
+Erreur lors du link. Le path vers les fichiers Visual C++ ne doit pas pointer au bon endroit (racine au lieu du sous répertoire amd64). Vérifier les variables d'environnement de varwin32.bat, modifier et ATTENTION relancer l'invite de commande pour bien nettoyer les variables.
+
+Paramétrer GDAL pour utiliser OGDI
+Modifier le fichier gdal-1.9.2\nmake.opt
+Remplacer
+# Uncomment the following and update to enable OGDI support.
+#OGDIDIR =	D:\warmerda\iii\devdir
+#OGDIVER =	31
+#OGDILIB =	$(OGDIDIR)\lib\$(TARGET)\ogdi$(OGDIVER).lib \
+#		$(OGDIDIR)\lib\$(TARGET)\zlib_ogdi$(OGDIVER).lib
+par
+OGDIDIR =	<Chemin vers ogdi dans cygwin>
+OGDIVER =	32
+OGDILIB =	$(OGDIDIR)\lib\win32\ogdi.lib \
+		$(OGDIDIR)\lib\win32\zlib_ogdi$(OGDIVER).lib
+
+--------------------------------------------------------------------------------------
 
 
 

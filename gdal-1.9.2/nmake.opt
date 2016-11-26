@@ -276,10 +276,10 @@ JPEG12_SUPPORTED = 1
 #DWG_LIB=$(DWG_LIB_DIR)\DD_AcisBuilder_dll.lib $(DWG_LIB_DIR)\DD_AcisRenderer_dll.lib $(DWG_LIB_DIR)\DD_Alloc_dll.lib $(DWG_LIB_DIR)\DD_BmpExport_dll.lib $(DWG_LIB_DIR)\DD_Br_dll.lib $(DWG_LIB_DIR)\DD_Db_dll.lib $(DWG_LIB_DIR)\DD_DwfExport_dll.lib $(DWG_LIB_DIR)\DD_DwfImport_dll.lib $(DWG_LIB_DIR)\DD_Ge_dll.lib $(DWG_LIB_DIR)\DD_Gi_dll.lib $(DWG_LIB_DIR)\DD_Gs_dll.lib $(DWG_LIB_DIR)\DD_ModelerGeometry_dll.lib $(DWG_LIB_DIR)\DD_Root_dll.lib $(DWG_LIB_DIR)\DD_Sm_dll.lib $(DWG_LIB_DIR)\DD_SpatialIndex_dll.lib $(DWG_LIB_DIR)\DD_VC6MD_OleDataAccess_dll.lib
 
 # Uncomment the following and update to enable OGDI support.
-#OGDIDIR =	D:\warmerda\iii\devdir
-#OGDIVER =	31
-#OGDILIB =	$(OGDIDIR)\lib\$(TARGET)\ogdi$(OGDIVER).lib \
-#		$(OGDIDIR)\lib\$(TARGET)\zlib_ogdi$(OGDIVER).lib
+OGDIDIR =	D:\Developpement\GIT-GDAL\cygwin64\home\ogdi-3.2.0
+OGDIVER =	32
+OGDILIB =	$(OGDIDIR)\lib\win32\ogdi.lib \
+		$(OGDIDIR)\lib\win32\zlib_ogdi$(OGDIVER).lib
 
 # Uncomment for Expat support (required for KML, GPX and GeoRSS read support).
 #EXPAT_DIR = "C:\Program Files\Expat 2.0.1"
