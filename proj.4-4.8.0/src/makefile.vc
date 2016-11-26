@@ -64,6 +64,7 @@ PROJ_EXE    = proj.exe
 CS2CS_EXE   = cs2cs.exe
 GEOD_EXE    = geod.exe
 NAD2BIN_EXE = nad2bin.exe
+GDAL_HOME = D:\Developpement\GIT-GDAL\distrib\gdal
 
 CFLAGS	=	/nologo -I. -DPROJ_LIB=\"$(PROJ_LIB_DIR)\" \
 		-DHAVE_STRERROR=1 $(OPTFLAGS)
@@ -133,4 +134,8 @@ install: all
 	copy *.dll $(INSTDIR)\bin
 	copy *.lib $(INSTDIR)\lib
 	copy proj_api.h $(INSTDIR)\include
+
+deploy :
+	-mkdir $(GDAL_HOME)\bin
+	copy $(PROJ_DLL) $(GDAL_HOME)\bin
 	

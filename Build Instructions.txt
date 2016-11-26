@@ -146,6 +146,8 @@ Modifier le fichier proj.4-4.8.0\nmake.opt et modifier
 !IFNDEF INSTDIR
  INSTDIR=<Lieu où déployer proj4>
 !ENDIF
+Modifier le fichier proj.4-4.8.0\src\makefile.vc
+GDAL_HOME = "<Meme répertoire que le GDAL_HOME paramétré plus haut>"
 
 Lancer l'invite de commande visual studio et taper "vcvarsall.bat amd64".
 Positionner vous dans le répertoire "proj.4-4.8.0" et taper :
@@ -154,6 +156,7 @@ BUILD SUCCESS !!
 et ensuite : 
 cd src 
 nmake /f makefile.vc install
+nmake /f makefile.vc deploy
 
 Paramétrer GDAL pour utiliser Proj4
 Modifier le fichier gdal-1.9.2\nmake.opt
