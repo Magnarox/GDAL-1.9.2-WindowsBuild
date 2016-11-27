@@ -75,20 +75,20 @@ HTMLDIR = $(GDAL_HOME)\html
 # Set this to the installed directory containing python.  If you don't
 # have python just let it point to a directory that does not exist (as now).
 !IFNDEF PYDIR 
-PYDIR   =	"D:\Developpement\GIT-GDAL\Python27"
+PYDIR   =	"D:\Developpement\GIT-GDAL\Python34"
 !ENDIF
 
 # Set the location of your SWIG installation
 !IFNDEF SWIG
-SWIG = D:\Developpement\GIT-GDAL\swigwin-2.0.4\swig.exe
+SWIG = D:\Developpement\GIT-GDAL\swigwin-1.3.40\swig.exe
 !ENDIF
 
 # SWIG Java settings
 !IFNDEF JAVA_HOME
-JAVA_HOME = c:\j2sdk1.4.2_12
+JAVA_HOME = "D:\Program Files\Java\jdk1.8.0_111"
 !ENDIF
 !IFNDEF ANT_HOME
-ANT_HOME=c:\programmi\apache-ant-1.7.0
+ANT_HOME=D:\Developpement\GIT-GDAL\apache-ant-1.7.0
 !ENDIF
 JAVADOC=$(JAVA_HOME)\bin\javadoc
 JAVAC=$(JAVA_HOME)\bin\javac

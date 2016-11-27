@@ -1,0 +1,48 @@
+DatasetHeader Begin
+	Version		= "7.1"
+	Name		= "Terracolor_SanFrancisco_US_15m.ers"
+	LastUpdated	= Tue Sep 29 21:29:03 GMT 2009
+	DataFile	= "Terracolor_SanFrancisco_US_15m.ecw"
+	DataSetType	= Translated
+	DataType	= Raster
+	ByteOrder	= LSBFirst
+	CoordinateSpace Begin
+		Datum		= "WGS84"
+		Projection	= "GEODETIC"
+		CoordinateType	= EN
+		Rotation	= 0:0:0.0
+	CoordinateSpace End
+	RasterInfo Begin
+		CellType	= Unsigned8BitInteger
+		CellInfo Begin
+			Xdimension	= 0.00013880000000000001
+			Ydimension	= 0.00013880000000000001
+		CellInfo End
+		NrOfLines	= 7204
+		NrOfCellsPerLine	= 7204
+		RegistrationCoord Begin
+			Eastings	= -122.80980403659304
+			Northings	= 38.285436652047451
+		RegistrationCoord End
+		NrOfBands	= 3
+		BandId Begin
+			Value		= "Red"
+		BandId End
+		BandId Begin
+			Value		= "Green"
+		BandId End
+		BandId Begin
+			Value		= "Blue"
+		BandId End
+		RegionInfo Begin
+			Type		= Polygon
+			RegionName	= "All"
+			SubRegion	= {
+				0	0
+				0	7204
+				7204	7204
+				7204	0
+			}
+		RegionInfo End
+	RasterInfo End
+DatasetHeader End
