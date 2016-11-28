@@ -141,6 +141,27 @@ Supported Formats:
   NGSGEOID (rov): NOAA NGS Geoid Height Grids
 
 ----------------------------------------------------------------
+Externaliser ZLIB 1.2.7
+Ouvrir la solution VS2010 de zlib-1.2.7\contrib\vstudio\vc10
+Positionner la Configuration en Release et la Platform en x64
+Pour chaque projet :
+Propriété > Configuration Properties > General
+Mettre la platform toolset à Windows 7.1 SDK
+Builder la solution
+
+Copier dans un répertoire <Externe ZLIB> les fichiers suivants :
+- Tous les .h du répertoire zlib-1.2.7
+- Le fichier zlibwapi.lib généré
+- Le fichier zlibwapi.dll généré
+
+Modifier le fichier geos-3.2.3\nmake.opt
+ZLIB_EXTERNAL_LIB = 1
+ZLIBDIR = <Externe ZLIB>
+ZLIB_LIB = $(ZLIBDIR)/zlibwapi.lib
+
+L'ensemble des makefile.vc a été modifié pour appeler cette librairie.
+
+----------------------------------------------------------------
 Build proj4 4.8.0
 Modifier le fichier proj.4-4.8.0\nmake.opt et modifier
 !IFNDEF INSTDIR
@@ -316,7 +337,7 @@ Lancer l'invite de commande visual studio et taper "vcvarsall.bat amd64".
 Positionner vous dans le répertoire "gdal-1.9.2" et taper :
 nmake /f makefile.vc deploy-ecw
 ------------------------------------------------------------------------------------------
-BINDINGS
+BINDINGS (A finaliser)
 
 Installation de swig
 Dézipper swigwin-2.0.4 où bon vous semble.

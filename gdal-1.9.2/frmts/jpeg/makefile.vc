@@ -4,11 +4,16 @@ GDAL_ROOT	=	..\..
 
 OBJ	=    jpgdataset.obj jpgdataset_12.obj vsidataio.obj
 
+!IFDEF ZLIB_EXTERNAL_LIB
+ZLIB_FLAGS =	-I$(ZLIBDIR)
+!ELSE
+ZLIB_FLAGS =	-I..\zlib
+!ENDIF
 
 !IFDEF JPEG_EXTERNAL_LIB
-EXTRAFLAGS      = -I..\zlib -I$(JPEGDIR)
+EXTRAFLAGS      = $(ZLIB_FLAGS) -I$(JPEGDIR)
 !ELSE
-EXTRAFLAGS = 	-I..\zlib -Ilibjpeg $(JPEG12_FLAGS)
+EXTRAFLAGS = 	$(ZLIB_FLAGS) -Ilibjpeg $(JPEG12_FLAGS)
 !ENDIF
 
 !IFDEF JPEG12_SUPPORTED

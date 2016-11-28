@@ -23,7 +23,13 @@ OBJ = \
 
 GDAL_ROOT	=	..\..\..
 
-EXTRAFLAGS = 	-I..\..\zlib
+!IFDEF ZLIB_EXTERNAL_LIB
+ZLIB_FLAGS =	-I$(ZLIBDIR)
+!ELSE
+ZLIB_FLAGS =	-I..\..\zlib
+!ENDIF
+
+EXTRAFLAGS = 	$(ZLIB_FLAGS)
 
 !INCLUDE $(GDAL_ROOT)\nmake.opt
 

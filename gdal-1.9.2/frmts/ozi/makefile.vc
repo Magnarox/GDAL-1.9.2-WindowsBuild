@@ -5,7 +5,13 @@ GDAL_ROOT	=	..\..
 
 !INCLUDE $(GDAL_ROOT)\nmake.opt
 
-EXTRAFLAGS      =        -I..\zlib
+!IFDEF ZLIB_EXTERNAL_LIB
+ZLIB_FLAGS =	-I$(ZLIBDIR)
+!ELSE
+ZLIB_FLAGS =	-I..\zlib
+!ENDIF
+
+EXTRAFLAGS      =        $(ZLIB_FLAGS)
 
 default:	$(OBJ)
 	xcopy /D  /Y *.obj ..\o

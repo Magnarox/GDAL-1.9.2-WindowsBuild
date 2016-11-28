@@ -196,6 +196,10 @@ JPEG_SUPPORTED = 1
 # This will enable 12bit libjpeg - use only with internal jpeg builds.
 JPEG12_SUPPORTED = 1
 
+ZLIB_EXTERNAL_LIB = 1
+ZLIBDIR = D:\Developpement\GIT-GDAL\GDAL-1.9.2-WindowsBuild\externalZlib
+ZLIB_LIB = $(ZLIBDIR)/zlibwapi.lib
+
 #if using an external jpeg library uncomment the follwing lines
 #JPEG_EXTERNAL_LIB = 1
 #JPEGDIR = c:/projects/jpeg-6b
@@ -637,7 +641,7 @@ EXTERNAL_LIBS =	$(OGDILIB) $(XERCES_LIB) $(EXPAT_LIB) $(OCI_LIB) $(PG_LIB) \
 	$(IDB_LIB) $(CURL_LIB) $(DODS_LIB) $(KAKLIB) $(PCIDSK_LIB) \
 	$(ODBCLIB) $(JASPER_LIB) $(PNG_LIB) $(ADD_LIBS) $(OPENJPEG_LIB) \
 	$(MRSID_LIDAR_LIB) $(LIBKML_LIBS) $(SOSI_LIBS) $(POPPLER_LIBS) $(PODOFO_LIBS) $(LZMA_LIBS) \
-	$(LIBICONV_LIBRARY) $(WEBP_LIBS) $(FGDB_LIB_LINK) $(FREEXL_LIBS) $(GTA_LIBS)
+	$(LIBICONV_LIBRARY) $(WEBP_LIBS) $(FGDB_LIB_LINK) $(FREEXL_LIBS) $(GTA_LIBS) $(ZLIB_LIB)
 		
 .c.obj:	
 	$(CC) $(CFLAGS) /c $*.c
