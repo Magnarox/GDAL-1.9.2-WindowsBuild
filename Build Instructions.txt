@@ -168,7 +168,17 @@ Modifier le fichier proj.4-4.8.0\nmake.opt et modifier
  INSTDIR=<Lieu où déployer proj4>
 !ENDIF
 Modifier le fichier proj.4-4.8.0\src\makefile.vc
+Ajouter 
 GDAL_HOME = "<Meme répertoire que le GDAL_HOME paramétré plus haut>"
+Remplacer 
+"copy proj_api.h $(INSTDIR)\include" par "*.h $(INSTDIR)\include"
+Ajouter
+deploy :
+	-mkdir $(GDAL_HOME)\bin
+	copy $(PROJ_DLL) $(GDAL_HOME)\bin
+	
+Afin d'éviter des clashs de nom lors du build d'OGDI, modifier les fichiers src/projects.h et src/pj_params.c
+Remplacer le type PVALUE par PROJVALUE.
 
 Lancer l'invite de commande visual studio et taper "vcvarsall.bat amd64".
 Positionner vous dans le répertoire "proj.4-4.8.0" et taper :
@@ -262,6 +272,15 @@ Modifier le fichier makefile et ajouter à la fin
 deploy:
 	cp ./bin/win32/*.dll <la valeur de GDAL_HOME>/bin
 
+Nous allons externaliser les librairies proj4 et zlib d'OGDI afin d'avoir une version unique de ces librairies.
+Modifier le fichier config/common.mak.in
+ZLIB_SETTING	=	external
+PROJ_SETTING	=	external
+PROJ_INCLUDE=$(INCL_SW)<Chemin vers les .h de proj4 (rep d'install)>
+ZLIB_INCLUDE=$(INCL_SW)<Externe ZLIB (voir plus haut)>
+ZLIB_LINKLIB=$(LINK_SW)<Externe ZLIB>/zlib<..>.lib
+PROJ_STATICLIB=$(LINK_SW)<Chemin vers le proj.lib>
+	
 Lancer l'invite de commande visual studio et taper "vcvarsall.bat amd64"
 Se positionner dans le répertoire <Rep Install Cygwin64>/home/ogdi-3.2.0 et taper "varwin32.bat"
 Dans le bash taper "make"
@@ -283,8 +302,7 @@ Remplacer
 par
 OGDIDIR =	<Chemin vers ogdi dans cygwin>
 OGDIVER =	32
-OGDILIB =	$(OGDIDIR)\lib\win32\ogdi.lib \
-		$(OGDIDIR)\lib\win32\zlib_ogdi$(OGDIVER).lib
+OGDILIB =	$(OGDIDIR)\lib\win32\ogdi.lib
 		
 Il est nécessaire de modifier le fichier frmts\makefile.vc pour pouvoir linker zlib
 Remplacer

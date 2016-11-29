@@ -133,7 +133,7 @@ install: all
 	copy *.exe $(INSTDIR)\bin
 	copy *.dll $(INSTDIR)\bin
 	copy *.lib $(INSTDIR)\lib
-	copy proj_api.h $(INSTDIR)\include
+	copy *.h $(INSTDIR)\include
 
 deploy :
 	-mkdir $(GDAL_HOME)\bin

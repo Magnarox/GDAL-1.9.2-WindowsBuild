@@ -197,7 +197,7 @@ JPEG_SUPPORTED = 1
 JPEG12_SUPPORTED = 1
 
 ZLIB_EXTERNAL_LIB = 1
-ZLIBDIR = D:\Developpement\GIT-GDAL\GDAL-1.9.2-WindowsBuild\externalZlib
+ZLIBDIR = D:\Developpement\GIT-GDAL\externalZlib
 ZLIB_LIB = $(ZLIBDIR)/zlibwapi.lib
 
 #if using an external jpeg library uncomment the follwing lines
@@ -283,8 +283,7 @@ ECW_PLUGIN = YES
 # Uncomment the following and update to enable OGDI support.
 OGDIDIR =	D:\Developpement\GIT-GDAL\cygwin64\home\ogdi-3.2.0
 OGDIVER =	32
-OGDILIB =	$(OGDIDIR)\lib\win32\ogdi.lib \
-		$(OGDIDIR)\lib\win32\zlib_ogdi$(OGDIVER).lib
+OGDILIB =	$(OGDIDIR)\lib\win32\ogdi.lib
 
 # Uncomment for Expat support (required for KML, GPX and GeoRSS read support).
 #EXPAT_DIR = "C:\Program Files\Expat 2.0.1"
