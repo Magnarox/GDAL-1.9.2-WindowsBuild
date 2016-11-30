@@ -355,7 +355,7 @@ Lancer l'invite de commande visual studio et taper "vcvarsall.bat amd64".
 Positionner vous dans le répertoire "gdal-1.9.2" et taper :
 nmake /f makefile.vc deploy-ecw
 ------------------------------------------------------------------------------------------
-BINDINGS (A finaliser)
+BINDINGS Python et Java
 
 Installation de swig
 Dézipper swigwin-2.0.4 où bon vous semble.
@@ -364,12 +364,23 @@ Modifier le fichier gdal-1.9.2\nmake.opt. Paramétrer la variable SWIG.
 Paramétrer les variables d'environnement suivante : 
 GDAL_DATA=<Chemin vers les datas>
 GDAL_DRIVER_PATH=<Chemin vers les gdal-plugins>
-PROJ_LIB=<Chemin vers le déploiement de PROJ4>
+PROJ_LIB=<Chemin vers le déploiement de PROJ4>/bin
 PATH=Ajouter le chemin vers les exe gdal
 
-Installation de Python 2.7.11 (Ou bon vous semble mais éviter les espaces dans les dossiers)
+Installation de Python 3.4.4 (Ou bon vous semble mais éviter les espaces dans les dossiers)
+Ajouter dans la variable d'env PATH le chemin vers <Install Python>/scripts
+Installer numpy en lançant la commande pip install numpy-1.10.4-cp34-none-win_amd64.whl
+
 Modifier le fichier gdal-1.9.2\nmake.opt
 Mettre à jour la variable PYDIR
+
+Installer un jdk1.8 et paramétrer le fichier gdal-1.9.2\nmake.opt
+
+Lancer l'invite de commande visual studio et taper "vcvarsall.bat amd64".
+Positionner vous dans le répertoire "gdal-1.9.2/swig" et taper :
+nmake /f makefile.vc python
+nmake /f makefile.vc java
+
 
 
 
