@@ -355,6 +355,19 @@ Lancer l'invite de commande visual studio et taper "vcvarsall.bat amd64".
 Positionner vous dans le répertoire "gdal-1.9.2" et taper :
 nmake /f makefile.vc deploy-ecw
 ------------------------------------------------------------------------------------------
+Drivers Postgres/postgis
+Installation de postgres 9.4 + postgis 2.2 (à l'aide de stack builder) (version 64 bits obviously)
+
+Modifier le fichier gdal-1.9.2\nmake.opt
+PG_INC_DIR = <Chemin install postgres>\9.4\include
+PG_LIB = <Chemin install postgres>\9.4\lib\libpq.lib wsock32.lib
+
+Copier les dll libpq.dll et libintl-8.dll (<Chemin install postgres>\9.4\bin) dans le répertoire d'installation gdal
+
+--> Une fois gdal compilé tester avec un shapefile sample :
+ogr2ogr.exe -f PostgreSQL PG:"dbname='<base avec postgis>' host='localhost' port='5432' user='postgres' password='<password de postgres>'" <Sample Shapefile>.shp
+Vérifier avec pgAdminIII qu'une nouvelle table dans "Base de données > <Nom de la base> > Schéma > public > Tables" a été créé et possède les données du shapefile.
+------------------------------------------------------------------------------------------
 BINDINGS Python et Java
 
 Installation de swig
